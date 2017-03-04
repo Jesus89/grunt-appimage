@@ -1,4 +1,4 @@
-# grunt-appimage
+# grunt-appimage [![Build Status](https://travis-ci.org/Jesus89/grunt-appimage.svg?branch=master)](https://travis-ci.org/Jesus89/grunt-appimage)
 
 > Grunt task to create AppImages.
 

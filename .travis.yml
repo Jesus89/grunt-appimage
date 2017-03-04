@@ -1,0 +1,10 @@
+sudo: true
+language: node_js
+node_js:
+  - '6'
+  - '4'
+addons:
+  apt:
+    packages:
+      - fuse
+      - squashfs-tools

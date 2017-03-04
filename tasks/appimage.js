@@ -45,13 +45,15 @@ module.exports = function(grunt) {
     var tmpBinDir = path.join(tmpUsrDir, 'bin');
     var tmpAppSfs = path.join(tmpDir, 'MyApp.squashfs');
     var tmpAppImage = path.join(tmpDir, 'MyApp.AppImage');
+    var localAppRun = path.join(__dirname, '..', 'bin', 'AppRun');
+    var localAppImage64 = path.join(__dirname, '..', 'bin', 'MyApp.AppImage.64');
     var finalAppImage = path.join(options.dest, data.output);
 
     // Create temporary MyApp.AppDir directories
     fse.mkdirsSync(tmpBinDir);
 
     // Copy AppRun script to the temporary MyApp.AppDir directory
-    fse.copySync('bin/AppRun', tmpAppRun);
+    fse.copySync(localAppRun, tmpAppRun);
 
     // Add App bin name to temporary AppRun script
     execSync('sed -i "s/%bin%/' + data.bin + '/g" ' + tmpAppRun);
@@ -60,7 +62,7 @@ module.exports = function(grunt) {
     fse.chmodSync(tmpAppRun, '755');
 
     // Copy default AppImage (contains the runtime) to the temporary directory
-    fse.copySync('bin/MyApp.AppImage.64', tmpAppImage);
+    fse.copySync(localAppImage64, tmpAppImage);
 
     // Copy recursive the App directory to the MyApp.AppDir/usr/bin directory
     fse.copySync(data.src, tmpBinDir);

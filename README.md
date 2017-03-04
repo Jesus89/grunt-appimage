@@ -19,11 +19,13 @@ $ npm install grunt-appimage --save-dev
 ```js
 grunt.initConfig({
   appimage: {
-    options: {
-      dest: 'path/to/dist'
-    },
-    src: 'path/to/myapp',
-    bin: 'myapp'
+    myapp: {
+      options: {
+        dest: 'path/to/dist'
+      },
+      src: 'path/to/myapp',
+      bin: 'myapp'
+    }
   }
 });
 ```
@@ -33,11 +35,13 @@ grunt.initConfig({
 ```js
 grunt.initConfig({
   appimage: {
-    options: {
-      dest: 'dist'
-    },
-    src: 'test/MyApp',
-    bin: 'myapp'
+    myapp: {
+      options: {
+        dest: 'dist'
+      },
+      src: 'test/MyApp',
+      bin: 'myapp'
+    }
   }
 });
 ```

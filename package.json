@@ -1,0 +1,31 @@
+{
+  "name": "grunt-appimage",
+  "version": "0.1.0",
+  "description": "Grunt task to create AppImages.",
+  "license": "GPL-2.0",
+  "author": {
+    "name": "Jesús Arroyo Torrens",
+    "email": "jesus.jkhlg@gmail.com"
+  },
+  "repository": "https://github.com/jesus89/grunt-appimage.git",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-nodeunit": "^1.0.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "appimage"
+  ],
+  "dependencies": {
+    "fs-extra": "^2.0.0",
+    "temporary": "0.0.8"
+  }
+}

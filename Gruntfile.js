@@ -37,6 +37,15 @@ module.exports = function(grunt) {
           dest: 'tmp'
         },
         src: 'test/HelloApp'
+      },
+      notify: {
+        options: {
+          name: 'NotifyApp',
+          exec: 'notify',
+          comment: 'Launch a system notification',
+          dest: 'tmp'
+        },
+        src: 'test/NotifyApp'
       }
     },
 

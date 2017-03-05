@@ -46,15 +46,24 @@ module.exports = function(grunt) {
     var tmpDesktop = path.join(tmpAppDir, options.exec + '.desktop');
     var tmpUsrDir = path.join(tmpAppDir, 'usr');
     var tmpBinDir = path.join(tmpUsrDir, 'bin');
+    var tmpShareDir = path.join(tmpUsrDir, 'share');
+    var tmpIconsDir = path.join(tmpShareDir, 'icons');
     var tmpAppSfs = path.join(tmpDir, 'MyApp.squashfs');
     var tmpAppImage = path.join(tmpDir, 'MyApp.AppImage');
     var localAppRun = path.join(__dirname, '..', 'res', 'AppRun');
     var localDesktop = path.join(__dirname, '..', 'res', 'desktop.tpl');
     var localAppImage64 = path.join(__dirname, '..', 'res', 'MyApp.AppImage.64');
     var finalAppImage = path.join(options.dest, data.output);
+    var iconsPath = options.icons;
 
     // Create temporary MyApp.AppDir directories
     fse.mkdirsSync(tmpBinDir);
+
+    // Copy AppRun script to the temporary MyApp.AppDir directory
+    fse.copySync(localAppRun, tmpAppRun);
+
+    // Make temporary AppRun executable
+    fse.chmodSync(tmpAppRun, '755');
 
     // Copy Desktop file to the temporary MyApp.AppDir directory
     fse.copySync(localDesktop, tmpDesktop);
@@ -62,13 +71,11 @@ module.exports = function(grunt) {
     // Add Desktop data in the temporary desktop file
     execSync('sed -i "s/<%= name %>/' + options.name + '/g" ' + tmpDesktop);
     execSync('sed -i "s/<%= comment %>/' + options.comment + '/g" ' + tmpDesktop);
-    execSync('sed -i "s/<%= exec %>/' + options.exec + '/g" ' + tmpDesktop);
 
-    // Copy AppRun script to the temporary MyApp.AppDir directory
-    fse.copySync(localAppRun, tmpAppRun);
-
-    // Make temporary AppRun executable
-    fse.chmodSync(tmpAppRun, '755');
+    // Copy icons to the MyApp.AppDir/usr/share/icons directory
+    if (iconsPath) {
+      fse.copySync(iconsPath, tmpIconsDir);
+    }
 
     // Copy default AppImage (contains the runtime) to the temporary directory
     fse.copySync(localAppImage64, tmpAppImage);

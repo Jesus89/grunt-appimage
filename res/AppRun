@@ -194,7 +194,7 @@ if [ -z "$SKIP" ] ; then
   xdg-icon-resource uninstall --noupdate --size 1024 "$RESOURCE_NAME"
 
   # Install the icon files for the application
-  ICONS=$(find "${APPDIR}/usr/share/icons/" -wholename "*/apps/${APP}.png" 2>/dev/null || true)
+  ICONS=$(find "${APPDIR}/usr/share/icons/" -wholename "*/apps/*.png" 2>/dev/null || true)
   for ICON in $ICONS ; do
     ICON_SIZE=$(echo "${ICON}" | rev | cut -d "/" -f 3 | rev | cut -d "x" -f 1)
     xdg-icon-resource install --context apps --size ${ICON_SIZE} "${ICON}" "${RESOURCE_NAME}"

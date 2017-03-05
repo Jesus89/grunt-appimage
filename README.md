@@ -24,6 +24,7 @@ grunt.initConfig({
         name: 'MyApp',
         exec: 'myapp',
         comment: 'Awesome App',
+        icons: 'path/to/icons',
         dest: 'path/to/dist'
       },
       src: 'path/to/myapp'
@@ -60,6 +61,12 @@ Type: `String`<br>
 Default: `MyApp`
 
 Comments about the application.
+
+#### icons
+Type: `String`<br>
+Default: `<empty>`
+
+Path to the icons file structure. See [default](https://github.com/Jesus89/grunt-appimage/tree/master/res/icons).
 
 #### dest
 Type: `String`<br>

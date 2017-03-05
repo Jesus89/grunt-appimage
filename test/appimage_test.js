@@ -8,11 +8,11 @@ exports.appimage = {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
+  helloApp: function(test) {
     test.expect(1);
 
-    var output = execSync('tmp/MyApp.AppImage');
-    test.equal(output.toString(), 'Hello, world!\n');
+    var output = execSync('export SKIP=1; tmp/HelloApp.AppImage world');
+    test.ok(output.toString().includes('Hello, world!\n'));
 
     test.done();
   }

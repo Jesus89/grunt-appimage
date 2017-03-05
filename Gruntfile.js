@@ -29,12 +29,14 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     appimage: {
-      myapp: {
+      hello: {
         options: {
+          name: 'HelloApp',
+          exec: 'hello',
+          comment: 'Return Hello, $1!',
           dest: 'tmp'
         },
-        src: 'test/MyApp',
-        bin: 'myapp'
+        src: 'test/HelloApp'
       }
     },
 

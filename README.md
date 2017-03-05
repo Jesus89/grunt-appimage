@@ -21,14 +21,51 @@ grunt.initConfig({
   appimage: {
     myapp: {
       options: {
+        name: 'MyApp',
+        exec: 'myapp',
+        comment: 'Awesome App',
         dest: 'path/to/dist'
       },
-      src: 'path/to/myapp',
-      bin: 'myapp'
+      src: 'path/to/myapp'
     }
   }
 });
 ```
+
+## Config
+
+#### src
+
+*Required*<br>
+Type: `String`
+
+Application directory.
+
+## Options
+
+#### name
+Type: `String`<br>
+Default: `MyApp`
+
+Application name.
+
+#### exec
+Type: `String`<br>
+Default: `myapp`
+
+Executable file name.
+
+#### comment
+Type: `String`<br>
+Default: `MyApp`
+
+Comments about the application.
+
+#### dest
+Type: `String`<br>
+Default: `dist`
+
+Destiny of the output AppImage.
 
 ## Examples
 
@@ -37,10 +74,9 @@ grunt.initConfig({
   appimage: {
     myapp: {
       options: {
-        dest: 'dist'
+        exec: 'app'
       },
-      src: 'test/MyApp',
-      bin: 'myapp'
+      src: 'dist/MyApp'
     }
   }
 });

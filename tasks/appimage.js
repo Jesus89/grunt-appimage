@@ -94,9 +94,7 @@ module.exports = function(grunt) {
     fse.chmodSync(finalAppImage, '755');
 
     // Remove the temporary directory
-    //fse.removeSync(tmpDir);
-
-    console.log(tmpDir);
+    fse.removeSync(tmpDir);
 
     grunt.log.writeln('File "' + data.output + '" created.');
 

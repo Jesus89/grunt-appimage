@@ -6,8 +6,6 @@ A simple way to automate the creation of GNU/Linux AppImages (http://appimage.or
 
 [![NPM](https://nodei.co/npm/grunt-appimage.png?)](https://nodei.co/npm/grunt-appimage/)
 
-### NOTE: this plugin is under development
-
 ## Install
 
 ```

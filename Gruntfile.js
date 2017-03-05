@@ -33,6 +33,7 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp',
           exec: 'hello',
+          arch: '64bit',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',
           dest: 'tmp'
@@ -43,6 +44,7 @@ module.exports = function(grunt) {
         options: {
           name: 'NotifyApp',
           exec: 'notify',
+          arch: '64bit',
           comment: 'Launch a system notification',
           icons: 'res/icons',
           dest: 'tmp'

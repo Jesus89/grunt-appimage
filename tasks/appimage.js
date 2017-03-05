@@ -17,8 +17,9 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults
     var options = this.options({
       name: 'MyApp',
-      comment: 'MyApp',
       exec: 'myapp',
+      arch: '64bit',
+      comment: 'MyApp',
       dest: 'dist'
     });
     var data = {
@@ -26,6 +27,12 @@ module.exports = function(grunt) {
       output: options.name + '.AppImage',
       execPath: path.join(this.data.src, options.exec)
     };
+
+    // Check arch
+    if (options.arch !== '32bit' && options.arch !== '64bit') {
+      grunt.log.warn('Invalid architecture. Using default: 64bit');
+      options.arch = '64bit';
+    }
 
     // Check OS GNU/Linux
     if (process.platform !== 'linux') {
@@ -50,9 +57,10 @@ module.exports = function(grunt) {
     var tmpIconsDir = path.join(tmpShareDir, 'icons');
     var tmpAppSfs = path.join(tmpDir, 'MyApp.squashfs');
     var tmpAppImage = path.join(tmpDir, 'MyApp.AppImage');
-    var localAppRun = path.join(__dirname, '..', 'res', 'AppRun');
-    var localDesktop = path.join(__dirname, '..', 'res', 'desktop.tpl');
-    var localAppImage64 = path.join(__dirname, '..', 'res', 'MyApp.AppImage.64');
+    var localResDir = path.join(__dirname, '..', 'res');
+    var localAppRun = path.join(localResDir, 'AppRun');
+    var localDesktop = path.join(localResDir, 'desktop.tpl');
+    var localAppImage = path.join(localResDir, 'AppImage.' + options.arch);
     var finalAppImage = path.join(options.dest, data.output);
     var iconsPath = options.icons;
 
@@ -78,7 +86,7 @@ module.exports = function(grunt) {
     }
 
     // Copy default AppImage (contains the runtime) to the temporary directory
-    fse.copySync(localAppImage64, tmpAppImage);
+    fse.copySync(localAppImage, tmpAppImage);
 
     // Copy recursive the App directory to the MyApp.AppDir/usr/bin directory
     fse.copySync(data.src, tmpBinDir);

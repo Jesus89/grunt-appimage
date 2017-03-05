@@ -21,6 +21,7 @@ grunt.initConfig({
       options: {
         name: 'MyApp',
         exec: 'myapp',
+        arch: '64bit',
         comment: 'Awesome App',
         icons: 'path/to/icons',
         dest: 'path/to/dist'
@@ -54,6 +55,12 @@ Default: `myapp`
 
 Executable file name.
 
+#### arch
+Type: `String`<br>
+Default: `64bit`
+
+AppImage architecture: `32bit`, `64bit`.
+
 #### comment
 Type: `String`<br>
 Default: `MyApp`
@@ -79,7 +86,8 @@ grunt.initConfig({
   appimage: {
     myapp: {
       options: {
-        exec: 'app'
+        exec: 'app',
+        arch: '32bit'
       },
       src: 'dist/MyApp'
     }

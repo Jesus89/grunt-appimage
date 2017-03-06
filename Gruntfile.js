@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     appimage: {
       hello1: {
         options: {
-          name: 'HelloApp',
+          name: 'HelloApp1',
           exec: 'hello',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       },
       hello2: {
         options: {
-          name: 'HelloApp',
+          name: 'HelloApp2',
           exec: 'newdir/hello',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
       },
       hello3: {
         options: {
-          name: 'HelloApp',
+          name: 'HelloApp3',
           exec: 'test/HelloApp/hello',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
       },
       hello4: {
         options: {
-          name: 'HelloApp',
+          name: 'HelloApp4',
           exec: 'newdir/test/HelloApp/hello',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',

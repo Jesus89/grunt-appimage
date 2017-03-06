@@ -42,7 +42,7 @@ export GSETTINGS_SCHEMA_DIR="${APPDIR}/usr/share/glib-2.0/schemas:${GSETTINGS_SC
 
 DESKTOP_FILE=$(find "$APPDIR" -maxdepth 1 -name "*.desktop" | head -n 1)
 DESKTOP_FILE_NAME=$(basename "${DESKTOP_FILE}")
-APP="${DESKTOP_FILE_NAME%.*}"
+APP="<%= app %>"
 BIN="$APPDIR/usr/bin/$APP"
 
 trap atexit EXIT

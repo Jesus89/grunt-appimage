@@ -33,55 +33,48 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp1',
           exec: 'hello',
-          icons: 'res/icons',
           archive: 'tmp/Hello1.AppImage'
         },
         files: [{
-          src: 'test/HelloApp'
+          src: 'test/HelloApp/hello'
         }]
       },
       hello2: {
         options: {
           name: 'HelloApp2',
           exec: 'newdir/hello',
-          icons: 'res/icons',
           archive: 'tmp/Hello2.AppImage'
         },
         files: [{
-          src: 'test/HelloApp',
-          dest: 'newdir'
+          src: 'test/HelloApp/*',
+          dest: 'newdir/'
         }]
       },
       hello3: {
         options: {
           name: 'HelloApp3',
           exec: 'test/HelloApp/hello',
-          icons: 'res/icons',
           archive: 'tmp/Hello3.AppImage'
         },
         files: [{
           expand: true,
-          src: 'test/HelloApp'
+          src: 'test/HelloApp/*'
         }]
       },
       hello4: {
         options: {
           name: 'HelloApp4',
           exec: 'newdir/test/HelloApp/hello',
-          icons: 'res/icons',
           archive: 'tmp/Hello4.AppImage'
         },
-        files: [{
-          expand: true,
-          src: 'test/HelloApp',
-          dest: 'newdir'
-        }]
+        expand: true,
+        src: 'test/HelloApp/*',
+        dest: 'newdir'
       },
       hello5: {
         options: {
           name: 'HelloApp5',
           exec: 'hello',
-          icons: 'res/icons',
           archive: 'tmp/Hello5.AppImage'
         },
         files: [{
@@ -90,7 +83,7 @@ module.exports = function(grunt) {
           src: ['*']
         }]
       },
-      /*notify: {
+      notify: {
         options: {
           name: 'NotifyApp',
           exec: 'notify',
@@ -99,10 +92,8 @@ module.exports = function(grunt) {
           icons: 'res/icons',
           archive: 'tmp/NotifyApp.AppImage'
         },
-        files: [{
-          src: 'test/NotifyApp'
-        }]
-      }*/
+        src: 'test/NotifyApp/*'
+      }
     },
 
     // Unit tests.

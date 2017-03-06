@@ -76,19 +76,23 @@ module.exports = function(grunt) {
 
     // Copy
     this.files.forEach(function(file) {
+      var expand = file.orig.expand || false;
       file.src.forEach(function(src) {
         // Validate src data
-        if (!grunt.file.exists(src) && (!grunt.file.isFile(src) || !grunt.file.isDirectory(src))) {
+        if (!grunt.file.exists(src)) {
           grunt.fail.warn('Invalid src (' + src + ')');
         }
-        // Copy recursive the App directory to the MyApp.AppDir/usr/bin directory
-        fse.copySync(src, path.join(tmpBinDir, file.dest || ''));
+        // Copy src file to the MyApp.AppDir/usr/bin directory
+        var destPath = expand ? file.dest : path.join(file.dest || '', path.basename(src));
+        if (grunt.file.isFile(src)) {
+          fse.copySync(src, path.join(tmpBinDir, destPath));
+        }
       });
     });
 
     // Validate executable
     if (!grunt.file.isFile(path.join(tmpBinDir, options.exec))) {
-      grunt.fail.warn('Invalid executable (' + options.exec + ')');
+      grunt.fail.warn('Executable not found (' + options.exec + ')');
     }
 
     // Copy AppRun script to the temporary MyApp.AppDir directory
@@ -127,8 +131,7 @@ module.exports = function(grunt) {
     fse.chmodSync(finalAppImage, '755');
 
     // Remove the temporary directory
-    //fse.removeSync(tmpDir);
-    console.log(tmpDir);
+    fse.removeSync(tmpDir);
 
     grunt.log.writeln('File "' + finalAppImage + '" created.');
 

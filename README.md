@@ -34,14 +34,11 @@ grunt.initConfig({
 });
 ```
 
+## Files
+
+Standard grunt files. [More information](https://gruntjs.com/configuring-tasks#files).
+
 ## Options
-
-#### archive
-*Required*<br>
-Type: `String` `Function`<br>
-Modes: `AppImage`
-
-This is used to define where to output the archive. Each target can only have one output file. If the type is a Function it must return a String.
 
 #### name
 *Required*<br>
@@ -73,6 +70,13 @@ Default: `<empty>`
 
 Icons path. See [default](https://github.com/Jesus89/grunt-appimage/tree/master/res/icons).
 
+#### archive
+*Required*<br>
+Type: `String` `Function`<br>
+Mode: `AppImage`
+
+This is used to define where to output the archive. Each target can only have one output file. If the type is a Function it must return a String.
+
 ## Examples
 
 ```js
@@ -80,12 +84,39 @@ grunt.initConfig({
   appimage: {
     myapp: {
       options: {
-        exec: 'app',
-        arch: '32bit'
+        name: 'MyApp'
+        exec: 'myapp',
         archive: 'dist/MyApp.AppImage'
       },
+      src: 'dist/MyApp/myapp'
+    }
+  }
+});
+```
+
+```js
+grunt.initConfig({
+  appimage: {
+    myapp32: {
+      options: {
+        name: 'MyApp'
+        exec: 'app',
+        arch: '32bit'
+        archive: 'dist/MyApp-32.AppImage'
+      },
       files: [{
-        src: 'dist/MyApp'
+        src: 'dist/MyApp/*'
+      }]
+    }
+    myapp64: {
+      options: {
+        name: 'MyApp'
+        exec: 'app',
+        arch: '64bit'
+        archive: 'dist/MyApp-64.AppImage'
+      },
+      files: [{
+        src: 'dist/MyApp/*'
       }]
     }
   }
@@ -97,29 +128,16 @@ grunt.initConfig({
   appimage: {
     myapp: {
       options: {
+        name: 'MyApp'
         exec: 'app',
-        arch: '32bit'
+        comment: 'Awesome App',
+        icons: 'resources/icons',
         archive: 'dist/MyApp.AppImage'
       },
       files: [
-        {src: 'dist/MyApp'},
-        {src: 'extra/data'}
+        {src: 'dist/MyApp/*', dot: true},
+        {src: 'dist/extra/*', dest: 'extra/', filter: 'isFile'}
       ]
-    }
-  }
-});
-```
-
-```js
-grunt.initConfig({
-  appimage: {
-    myapp: {
-      options: {
-        exec: 'app',
-        arch: '32bit'
-        archive: 'dist/MyApp.AppImage'
-      },
-      src: 'dist/MyApp'
     }
   }
 });

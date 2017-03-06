@@ -28,5 +28,8 @@ exports.appimage = {
   },
   helloApp4: function(test) {
     helloApp(test, 'tmp/Hello4.AppImage');
+  },
+  helloApp5: function(test) {
+    helloApp(test, 'tmp/Hello5.AppImage');
   }
 };

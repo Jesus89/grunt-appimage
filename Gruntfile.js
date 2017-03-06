@@ -33,7 +33,6 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp1',
           exec: 'hello',
-          comment: 'Return Hello, arg!',
           icons: 'res/icons',
           archive: 'tmp/Hello1.AppImage'
         },
@@ -45,7 +44,6 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp2',
           exec: 'newdir/hello',
-          comment: 'Return Hello, arg!',
           icons: 'res/icons',
           archive: 'tmp/Hello2.AppImage'
         },
@@ -58,7 +56,6 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp3',
           exec: 'test/HelloApp/hello',
-          comment: 'Return Hello, arg!',
           icons: 'res/icons',
           archive: 'tmp/Hello3.AppImage'
         },
@@ -71,7 +68,6 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp4',
           exec: 'newdir/test/HelloApp/hello',
-          comment: 'Return Hello, arg!',
           icons: 'res/icons',
           archive: 'tmp/Hello4.AppImage'
         },
@@ -79,6 +75,19 @@ module.exports = function(grunt) {
           expand: true,
           src: 'test/HelloApp',
           dest: 'newdir'
+        }]
+      },
+      hello5: {
+        options: {
+          name: 'HelloApp5',
+          exec: 'hello',
+          icons: 'res/icons',
+          archive: 'tmp/Hello5.AppImage'
+        },
+        files: [{
+          expand: true,
+          cwd: 'test/HelloApp',
+          src: ['*']
         }]
       },
       /*notify: {

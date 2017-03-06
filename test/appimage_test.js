@@ -6,7 +6,7 @@ var execSync = require('child_process').execSync;
 function helloApp(test, appImage) {
   test.expect(1);
 
-  var output = execSync('export SKIP=1; ' + appImage + ' world');
+  var output = execSync(appImage + ' world');
   test.ok(output.toString().includes('Hello, world!\n'));
 
   test.done();

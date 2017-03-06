@@ -33,7 +33,8 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp1',
           exec: 'hello',
-          archive: 'tmp/Hello1.AppImage'
+          archive: 'tmp/Hello1.AppImage',
+          install: false
         },
         files: [{
           src: 'test/HelloApp/hello'
@@ -43,7 +44,8 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp2',
           exec: 'newdir/hello',
-          archive: 'tmp/Hello2.AppImage'
+          archive: 'tmp/Hello2.AppImage',
+          install: false
         },
         files: [{
           src: 'test/HelloApp/*',
@@ -54,7 +56,8 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp3',
           exec: 'test/HelloApp/hello',
-          archive: 'tmp/Hello3.AppImage'
+          archive: 'tmp/Hello3.AppImage',
+          install: false
         },
         files: [{
           expand: true,
@@ -65,7 +68,8 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp4',
           exec: 'newdir/test/HelloApp/hello',
-          archive: 'tmp/Hello4.AppImage'
+          archive: 'tmp/Hello4.AppImage',
+          install: false
         },
         expand: true,
         src: 'test/HelloApp/*',
@@ -75,7 +79,8 @@ module.exports = function(grunt) {
         options: {
           name: 'HelloApp5',
           exec: 'hello',
-          archive: 'tmp/Hello5.AppImage'
+          archive: 'tmp/Hello5.AppImage',
+          install: false
         },
         files: [{
           expand: true,

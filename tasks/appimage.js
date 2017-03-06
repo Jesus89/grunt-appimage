@@ -19,8 +19,10 @@ module.exports = function(grunt) {
       name: null,
       exec: null,
       arch: '64bit',
+      icons: '',
       comment: '',
-      archive: null
+      archive: null,
+      install: true
     });
 
     // Check OS GNU/Linux
@@ -105,6 +107,7 @@ module.exports = function(grunt) {
     // Add application data in the temporary desktop file
     execSync('sed -i "s/<%= name %>/' + options.name + '/g" ' + tmpAppRun);
     execSync('sed -i "s/<%= app %>/' + options.exec.replace(/\//g, '\\/') + '/g" ' + tmpAppRun);
+    execSync('sed -i "s/<%= install %>/' + (options.install ? '1' : '0') + '/g" ' + tmpAppRun);
 
     // Make temporary AppRun executable
     fse.chmodSync(tmpAppRun, '755');

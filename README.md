@@ -24,7 +24,8 @@ grunt.initConfig({
         arch: '64bit',
         icons: 'path/to/icons',
         comment: 'Awesome App',
-        archive: 'path/to/dist/MyApp.AppImage'
+        archive: 'path/to/MyApp.AppImage'
+        install: true
       },
       files: [{
         src: 'path/to/myapp'
@@ -76,6 +77,12 @@ Type: `String` `Function`<br>
 Mode: `AppImage`
 
 This is used to define where to output the archive. Each target can only have one output file. If the type is a Function it must return a String.
+
+#### install
+Type: `Boolean`<br>
+Default: `true`
+
+This flag enables an installation message when the AppImage is launched to install the application (desktop launch and icons).
 
 ## Examples
 
@@ -132,7 +139,8 @@ grunt.initConfig({
         exec: 'app',
         icons: 'res/icons',
         comment: 'Awesome App',
-        archive: 'dist/MyApp.AppImage'
+        archive: 'dist/MyApp.AppImage',
+        install: false
       },
       files: [
         {src: 'dist/MyApp/*', dot: true},

@@ -107,7 +107,7 @@ grunt.initConfig({
       files: [{
         src: 'dist/MyApp/*'
       }]
-    }
+    },
     myapp64: {
       options: {
         name: 'MyApp'

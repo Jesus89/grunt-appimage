@@ -70,6 +70,10 @@ module.exports = function(grunt) {
     var localAppImage = path.join(localResDir, 'AppImage.' + options.arch);
     var finalAppImage = options.archive;
     var iconsPath = options.icons;
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
 
     // Create temporary MyApp.AppDir directories
     fse.mkdirsSync(tmpBinDir);
@@ -111,6 +115,7 @@ module.exports = function(grunt) {
     // Add Desktop data in the temporary desktop file
     execSync('sed -i "s/<%= name %>/' + options.name + '/g" ' + tmpDesktop);
     execSync('sed -i "s/<%= comment %>/' + options.comment + '/g" ' + tmpDesktop);
+    execSync('sed -i "s/<%= uuid %>/' + uuid + '/g" ' + tmpDesktop);
 
     // Copy icons to the MyApp.AppDir/usr/share/icons directory
     if (iconsPath) {

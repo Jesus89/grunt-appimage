@@ -29,28 +29,71 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     appimage: {
-      hello: {
+      hello1: {
         options: {
           name: 'HelloApp',
           exec: 'hello',
-          arch: '64bit',
           comment: 'Return Hello, arg!',
           icons: 'res/icons',
-          dest: 'tmp'
+          archive: 'tmp/Hello1.AppImage'
         },
-        src: 'test/HelloApp'
+        files: [{
+          src: 'test/HelloApp'
+        }]
       },
-      notify: {
+      hello2: {
+        options: {
+          name: 'HelloApp',
+          exec: 'newdir/hello',
+          comment: 'Return Hello, arg!',
+          icons: 'res/icons',
+          archive: 'tmp/Hello2.AppImage'
+        },
+        files: [{
+          src: 'test/HelloApp',
+          dest: 'newdir'
+        }]
+      },
+      hello3: {
+        options: {
+          name: 'HelloApp',
+          exec: 'test/HelloApp/hello',
+          comment: 'Return Hello, arg!',
+          icons: 'res/icons',
+          archive: 'tmp/Hello3.AppImage'
+        },
+        files: [{
+          expand: true,
+          src: 'test/HelloApp'
+        }]
+      },
+      hello4: {
+        options: {
+          name: 'HelloApp',
+          exec: 'newdir/test/HelloApp/hello',
+          comment: 'Return Hello, arg!',
+          icons: 'res/icons',
+          archive: 'tmp/Hello4.AppImage'
+        },
+        files: [{
+          expand: true,
+          src: 'test/HelloApp',
+          dest: 'newdir'
+        }]
+      },
+      /*notify: {
         options: {
           name: 'NotifyApp',
           exec: 'notify',
           arch: '64bit',
           comment: 'Launch a system notification',
           icons: 'res/icons',
-          dest: 'tmp'
+          archive: 'tmp/NotifyApp.AppImage'
         },
-        src: 'test/NotifyApp'
-      }
+        files: [{
+          src: 'test/NotifyApp'
+        }]
+      }*/
     },
 
     // Unit tests.

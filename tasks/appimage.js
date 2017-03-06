@@ -20,30 +20,27 @@ module.exports = function(grunt) {
       exec: 'myapp',
       arch: '64bit',
       comment: 'MyApp',
-      dest: 'dist'
+      archive: null
     });
-    var data = {
-      src: path.resolve(this.data.src),
-      output: options.name + '.AppImage',
-      execPath: path.join(this.data.src, options.exec)
-    };
-
-    // Check arch
-    if (options.arch !== '32bit' && options.arch !== '64bit') {
-      grunt.log.warn('Invalid architecture. Using default: 64bit');
-      options.arch = '64bit';
-    }
 
     // Check OS GNU/Linux
     if (process.platform !== 'linux') {
-      grunt.fail.warn('This plugin runs only on GNU/Linux systems');
+      grunt.log.warn('This plugin runs only on GNU/Linux systems');
+      return;
     }
 
-    // Validate input data
-    // - App directory exists
-    // - App binary exists
-    if (!grunt.file.isDir(data.src) || !grunt.file.isFile(data.execPath)) {
-      grunt.fail.warn('Invalid input data');
+    // Check arch
+    if (options.arch !== '32bit' && options.arch !== '64bit') {
+      grunt.log.warn('Invalid architecture (' + options.arch + '). Using default: 64bit');
+      options.arch = '64bit';
+    }
+
+    // Check archive
+    if (typeof options.archive === 'function') {
+      options.archive = options.archive();
+    }
+    if (typeof options.archive !== 'string' || options.archive.length === 0) {
+      grunt.fail.warn('Unable to package: no valid archive file was specified');
     }
 
     var _tmp = new tmp.Dir();
@@ -61,11 +58,28 @@ module.exports = function(grunt) {
     var localAppRun = path.join(localResDir, 'AppRun');
     var localDesktop = path.join(localResDir, 'desktop.tpl');
     var localAppImage = path.join(localResDir, 'AppImage.' + options.arch);
-    var finalAppImage = path.join(options.dest, data.output);
+    var finalAppImage = options.archive;
     var iconsPath = options.icons;
 
     // Create temporary MyApp.AppDir directories
     fse.mkdirsSync(tmpBinDir);
+
+    // Copy
+    this.files.forEach(function(file) {
+      file.src.forEach(function(src) {
+        // Validate src data
+        if (!grunt.file.exists(src) && (!grunt.file.isFile(src) || !grunt.file.isDirectory(src))) {
+          grunt.fail.warn('Invalid src (' + src + ')');
+        }
+        // Copy recursive the App directory to the MyApp.AppDir/usr/bin directory
+        fse.copySync(src, path.join(tmpBinDir, file.dest || ''));
+      });
+    });
+
+    // Validate executable
+    if (!grunt.file.isFile(path.join(tmpBinDir, options.exec))) {
+      grunt.fail.warn('Invalid executable (' + options.exec + ')');
+    }
 
     // Copy AppRun script to the temporary MyApp.AppDir directory
     fse.copySync(localAppRun, tmpAppRun);
@@ -88,9 +102,6 @@ module.exports = function(grunt) {
     // Copy default AppImage (contains the runtime) to the temporary directory
     fse.copySync(localAppImage, tmpAppImage);
 
-    // Copy recursive the App directory to the MyApp.AppDir/usr/bin directory
-    fse.copySync(data.src, tmpBinDir);
-
     // Create MyApp.AppImage
     execSync('mksquashfs ' + tmpAppDir + ' ' + tmpAppSfs + ' -root-owned -noappend');
     execSync('cat ' + tmpAppSfs + ' >> ' + tmpAppImage);
@@ -102,9 +113,10 @@ module.exports = function(grunt) {
     fse.chmodSync(finalAppImage, '755');
 
     // Remove the temporary directory
-    fse.removeSync(tmpDir);
+    //fse.removeSync(tmpDir);
+    console.log(tmpDir);
 
-    grunt.log.writeln('File "' + data.output + '" created.');
+    grunt.log.writeln('File "' + finalAppImage + '" created.');
 
   });
 

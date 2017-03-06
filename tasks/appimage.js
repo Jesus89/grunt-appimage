@@ -16,10 +16,10 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('appimage', 'Grunt task to create AppImages.', function() {
     // Merge task-specific and/or target-specific options with these defaults
     var options = this.options({
-      name: 'MyApp',
-      exec: 'myapp',
+      name: null,
+      exec: null,
       arch: '64bit',
-      comment: 'MyApp',
+      comment: '',
       archive: null
     });
 
@@ -29,10 +29,14 @@ module.exports = function(grunt) {
       return;
     }
 
-    // Check arch
-    if (options.arch !== '32bit' && options.arch !== '64bit') {
-      grunt.log.warn('Invalid architecture (' + options.arch + '). Using default: 64bit');
-      options.arch = '64bit';
+    // Check name
+    if (typeof options.name !== 'string' || options.name.length === 0) {
+      grunt.fail.warn('Unable to package: no valid application name was specified');
+    }
+
+    // Check exec path
+    if (typeof options.exec !== 'string' || options.exec.length === 0) {
+      grunt.fail.warn('Unable to package: no valid exec path was specified');
     }
 
     // Check archive
@@ -41,6 +45,12 @@ module.exports = function(grunt) {
     }
     if (typeof options.archive !== 'string' || options.archive.length === 0) {
       grunt.fail.warn('Unable to package: no valid archive file was specified');
+    }
+
+    // Check arch
+    if (options.arch !== '32bit' && options.arch !== '64bit') {
+      grunt.log.warn('Invalid architecture (' + options.arch + '). Using default: 64bit');
+      options.arch = '64bit';
     }
 
     var _tmp = new tmp.Dir();

@@ -27,9 +27,7 @@ grunt.initConfig({
         archive: 'path/to/dist/MyApp.AppImage'
       },
       files: [{
-        expand: true,
-        src: 'path/to/myapp',
-        dest: 'dest/path'
+        src: 'path/to/myapp'
       }]
     }
   }
@@ -39,7 +37,6 @@ grunt.initConfig({
 ## Options
 
 #### archive
-
 *Required*<br>
 Type: `String` `Function`<br>
 Modes: `AppImage`
@@ -47,14 +44,14 @@ Modes: `AppImage`
 This is used to define where to output the archive. Each target can only have one output file. If the type is a Function it must return a String.
 
 #### name
+*Required*<br>
 Type: `String`<br>
-Default: `MyApp`
 
 Application name.
 
 #### exec
+*Required*<br>
 Type: `String`<br>
-Default: `myapp`
 
 Executable file path.
 
@@ -66,7 +63,7 @@ AppImage architecture: `32bit`, `64bit`.
 
 #### comment
 Type: `String`<br>
-Default: `MyApp`
+Default: `<empty>`
 
 Comments about the application.
 
@@ -74,7 +71,7 @@ Comments about the application.
 Type: `String`<br>
 Default: `<empty>`
 
-Path to the icons file structure. See [default](https://github.com/Jesus89/grunt-appimage/tree/master/res/icons).
+Icons path. See [default](https://github.com/Jesus89/grunt-appimage/tree/master/res/icons).
 
 ## Examples
 

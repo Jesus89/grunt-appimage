@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     var tmpDir = _tmp.path;
     var tmpAppDir = path.join(tmpDir, 'MyApp.AppDir');
     var tmpAppRun = path.join(tmpAppDir, 'AppRun');
-    var tmpDesktop = path.join(tmpAppDir, path.basename(options.exec) + '.desktop');
+    var tmpDesktop = path.join(tmpAppDir, options.name + '.desktop');
     var tmpUsrDir = path.join(tmpAppDir, 'usr');
     var tmpBinDir = path.join(tmpUsrDir, 'bin');
     var tmpShareDir = path.join(tmpUsrDir, 'share');
@@ -84,7 +84,8 @@ module.exports = function(grunt) {
     // Copy AppRun script to the temporary MyApp.AppDir directory
     fse.copySync(localAppRun, tmpAppRun);
 
-    // Add Executable path in the temporary desktop file
+    // Add application data in the temporary desktop file
+    execSync('sed -i "s/<%= name %>/' + options.name + '/g" ' + tmpAppRun);
     execSync('sed -i "s/<%= app %>/' + options.exec.replace(/\//g, '\\/') + '/g" ' + tmpAppRun);
 
     // Make temporary AppRun executable

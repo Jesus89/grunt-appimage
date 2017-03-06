@@ -22,8 +22,8 @@ grunt.initConfig({
         name: 'MyApp',
         exec: 'myapp',
         arch: '64bit',
-        comment: 'Awesome App',
         icons: 'path/to/icons',
+        comment: 'Awesome App',
         archive: 'path/to/dist/MyApp.AppImage'
       },
       files: [{
@@ -58,17 +58,17 @@ Default: `64bit`
 
 AppImage architecture: `32bit`, `64bit`.
 
+#### icons
+Type: `String`<br>
+Default: `<empty>`
+
+Icons path. [More information](https://github.com/Jesus89/grunt-appimage/wiki/Create-icons).
+
 #### comment
 Type: `String`<br>
 Default: `<empty>`
 
 Comments about the application.
-
-#### icons
-Type: `String`<br>
-Default: `<empty>`
-
-Icons path. See [default](https://github.com/Jesus89/grunt-appimage/tree/master/res/icons).
 
 #### archive
 *Required*<br>
@@ -130,8 +130,8 @@ grunt.initConfig({
       options: {
         name: 'MyApp'
         exec: 'app',
+        icons: 'res/icons',
         comment: 'Awesome App',
-        icons: 'resources/icons',
         archive: 'dist/MyApp.AppImage'
       },
       files: [

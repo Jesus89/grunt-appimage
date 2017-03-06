@@ -88,8 +88,8 @@ module.exports = function(grunt) {
           name: 'NotifyApp',
           exec: 'notify',
           arch: '64bit',
-          comment: 'Launch a system notification',
           icons: 'res/icons',
+          comment: 'Launch a system notification',
           archive: 'tmp/NotifyApp.AppImage'
         },
         src: 'test/NotifyApp/*'

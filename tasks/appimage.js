@@ -69,6 +69,7 @@ module.exports = function(grunt) {
     var localResDir = path.join(__dirname, '..', 'res');
     var localAppRun = path.join(localResDir, 'AppRun');
     var localDesktop = path.join(localResDir, 'desktop.tpl');
+    var localMksquashfs = path.join(localResDir, 'mksquashfs.amd64');
     var localAppImage = path.join(localResDir, 'AppImage.' + options.arch);
     var finalAppImage = options.archive;
     var iconsPath = options.icons;
@@ -129,7 +130,17 @@ module.exports = function(grunt) {
     fse.copySync(localAppImage, tmpAppImage);
 
     // Create MyApp.AppImage
-    execSync('mksquashfs ' + tmpAppDir + ' ' + tmpAppSfs + ' -root-owned -noappend');
+    function mksfsCommand(bin) {
+      return bin +  ' ' + tmpAppDir + ' ' + tmpAppSfs + ' -root-owned -noappend';
+    }
+    try {
+      // Try the system mksquashfs
+      execSync(mksfsCommand('mksquashfs'));
+    }
+    catch(e) {
+      // If fails try the local mksquashfs
+      execSync(mksfsCommand(localMksquashfs));
+    }
     execSync('cat ' + tmpAppSfs + ' >> ' + tmpAppImage);
 
     // Copy AppImage to dest directory
@@ -141,7 +152,7 @@ module.exports = function(grunt) {
     // Remove the temporary directory
     fse.removeSync(tmpDir);
 
-    grunt.log.writeln('File "' + finalAppImage + '" created.');
+    grunt.log.ok('File "' + finalAppImage + '" created.');
 
   });
 
